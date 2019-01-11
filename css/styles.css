@@ -1,0 +1,54 @@
+body {
+  box-sizing: border-box;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 2.5em;
+  width: 50%;
+  max-width: 800px;
+  min-width: 480px;
+  margin: 200px auto ;
+  padding: 10px;
+  border: 10px solid white;
+  text-align: center;
+  background-color: #f5564e;
+  color: white;
+
+
+}
+
+h1{
+  margin: 20px;
+  font-weight: bolder;
+}
+
+.lastResult {
+  color: white;
+  padding: 3px;
+}
+
+.guessSubmit{
+  height: 50px;
+  width: 200px;
+  margin: 10px auto;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+
+
+a{
+  color: black;
+  font-size: 1.5em;
+
+}
+
+.btnLevel{
+  margin: 35px auto;
+}
+
+a:hover{
+  color: white;
+}
+
+.form{
+  color: black;
+}
