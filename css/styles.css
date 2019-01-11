@@ -2,17 +2,23 @@ body {
   box-sizing: border-box;
   font-family: 'Exo 2', sans-serif;
   font-size: 2.5em;
-  width: 50%;
-  max-width: 800px;
-  min-width: 480px;
+  min-width: 500px;
+  height: 50%;
   margin: 200px auto ;
   padding: 10px;
   border: 10px solid white;
   text-align: center;
   background-color: #f5564e;
   color: white;
+  max-width: 80%;
 
 
+}
+
+.game{
+  background-color: #009f9d;
+  font-weight: bold;
+  line-height: 2;
 }
 
 h1{
@@ -22,7 +28,7 @@ h1{
 
 .lastResult {
   color: white;
-  padding: 3px;
+  
 }
 
 .guessSubmit{
@@ -51,4 +57,13 @@ a:hover{
 
 .form{
   color: black;
+}
+
+ @media (min-width:1000px) {
+  body{max-width: 50%;}
+}
+
+button{
+  display: block;
+  margin: 5px auto;
 }

@@ -1,5 +1,7 @@
 
 
+// Initial variables
+
 let randomNumber = Math.floor(Math.random() * 100 + 1);
 
 const guesses = document.querySelector('.guesses');
@@ -10,23 +12,59 @@ const guessField = document.querySelector('.guessField');
 const guessSubmit = document.querySelector('.guessSubmit');
 
 let turn = 1;
+let maxTurns = selectLevel();
 let resetButton;
+let homeLink;
+
+
+// Select the amount of turns according to the level
+
+function selectLevel(){
+
+  const level = document.querySelector('h1').textContent;
+
+  if (level === 'EASY'){
+    return 10;
+  }
+
+  else if (level === 'MEDIUM'){
+    return 7;
+  }
+
+  else{
+    return 5;
+  }
+
+}
+
+
+
+let availablesTurns = selectLevel();
+
+let indicator = document.querySelector('.availablesTurns');
+indicator.textContent = 'Availables Turns: ' + availablesTurns;
+guessSubmit.addEventListener('click', checkGuess);
 
 function checkGuess() {
 
   let userGuess = Number(guessField.value);
 
   if (turn == 1) {
-    guesses.textContent = 'Previous guesses: ';
-  }
+    guesses.textContent = 'Previous guesses: ' ;
 
-  guesses.textContent += userGuess + ' - ';
+  }
+  availablesTurns -= 1;
+  guesses.textContent += userGuess + ' | ';
+  indicator.textContent = 'Availables Turns: ' + availablesTurns;
+
+
 
   if (userGuess === randomNumber) {
     lastResult.textContent = 'Congratulations! You guessed the number';
     lastResult.style.backgroundColor = 'green';
+    setGameOver();
 
-  } else if (turn === 10) {
+  } else if (turn === maxTurns) {
     lastResult.textContent = 'GAME OVER!!';
     setGameOver();
   } else {
@@ -48,24 +86,39 @@ function checkGuess() {
 
 }
 
+
+
 function setGameOver(){
   guessField.disabled = 'true';
   guessSubmit.disabled = 'true';
   resetButton = document.createElement('button');
   resetButton.textContent = 'Start a new Game';
+  resetButton.style.color = 'black';
   document.body.appendChild(resetButton);
   resetButton.addEventListener('click',resetGame);
   lowOrHigh.textContent = "The number was " + randomNumber;
+  lowOrHigh.style.backgroundColor = 'green';
+  homeLink = document.createElement('a');
+  homeLink.textContent = 'Go to home';
+  homeLink.style.color = 'white';
+  homeLink.setAttribute('href','index.html');
+  document.body.appendChild(homeLink);
+
+
+
 }
 
 function resetGame(){
   turn = 1;
+  availablesTurns = selectLevel();
+  indicator.textContent = 'Available Turns: ' + availablesTurns;
   const resetParas = document.querySelectorAll('.resultParas');
   for (let i = 0; i < resetParas.length; i++){
     resetParas[i].textContent = '';
   }
 
   resetButton.parentNode.removeChild(resetButton);
+  homeLink.parentNode.removeChild(homeLink);
 
   guessField.disabled = false;
   guessSubmit.disabled = false;
@@ -74,7 +127,10 @@ function resetGame(){
 
   lastResult.style.backgroundColor = 'white';
 
-  randomNumber = Math.floor(Math.random()*100 +1);
-}
 
-guessSubmit.addEventListener('click', checkGuess);
+
+  randomNumber = Math.floor(Math.random()*100 +1);
+
+
+
+}
